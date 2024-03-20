@@ -17,22 +17,19 @@ def get_dates():  # in cloud fails because localhost is inside docker, need publ
 
 dates = get_dates()
 
-# AWS Open Data Terrain Tiles
-TERRAIN_IMAGE = (
-    "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
-)
-
-# Define how to parse elevation tiles
-ELEVATION_DECODER = {"rScaler": 256, "gScaler": 1, "bScaler": 1 / 256, "offset": -32768}
-
 st.sidebar.markdown("### Dates")
 
 selected_layers = [
     pdk.Layer(
         "TerrainLayer",
         texture=f"http://{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
-        elevation_decoder=ELEVATION_DECODER,
-        elevation_data=TERRAIN_IMAGE,
+        elevation_decoder={
+            "rScaler": 256,
+            "gScaler": 1,
+            "bScaler": 1 / 256,
+            "offset": -32768,
+        },
+        elevation_data="https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
     )
     for date in dates
     if st.sidebar.checkbox(date, True)
