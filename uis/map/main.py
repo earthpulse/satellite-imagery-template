@@ -7,6 +7,7 @@ st.set_page_config(page_title="SPAI Demo", page_icon="🌍")
 
 storage = Storage()
 
+
 @st.cache_data(ttl=10)
 def get_dates():  # in cloud fails because localhost is inside docker, need public url
     images = storage["data"].list(f"*.tif")
@@ -29,8 +30,7 @@ st.sidebar.markdown("### Dates")
 selected_layers = [
     pdk.Layer(
         "TerrainLayer",
-        texture=f"{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
-        # texture=f"http://{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
+        texture=f"http://{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
         elevation_decoder=ELEVATION_DECODER,
         elevation_data=TERRAIN_IMAGE,
     )
@@ -53,4 +53,3 @@ if selected_layers:
     )
 else:
     st.error("Please choose at least one layer above.")
-

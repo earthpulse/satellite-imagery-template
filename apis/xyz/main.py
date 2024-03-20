@@ -39,8 +39,8 @@ def retrieve_image_tile(
     z: int,
     x: int,
     y: int,
-    bands: str = "1",
-    stretch: str = "0,1",
+    bands: str = "4,3,2",
+    stretch: str = "0,4000",
     palette: str = "viridis",
 ):
     image_path = storage.get_path(image)
