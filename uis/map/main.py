@@ -29,7 +29,8 @@ st.sidebar.markdown("### Dates")
 selected_layers = [
     pdk.Layer(
         "TerrainLayer",
-        texture=f"http://{os.getenv('XYZ_URL')}/S2_{date}.tif/{{z}}/{{x}}/{{y}}.png",
+        texture=f"{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
+        # texture=f"http://{os.getenv('XYZ_URL')}/S2L2A_{date}.tif/{{z}}/{{x}}/{{y}}.png",
         elevation_decoder=ELEVATION_DECODER,
         elevation_data=TERRAIN_IMAGE,
     )

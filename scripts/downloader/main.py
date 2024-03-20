@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta
 from dotenv import load_dotenv
+import os
 
 from spai.storage import Storage
 from spai.config import SPAIVars
@@ -8,6 +8,10 @@ from spai.data.satellite import explore_satellite_images, download_satellite_ima
 load_dotenv()
 
 vars = SPAIVars()
+
+
+os.environ["SH_CLIENT_ID"] = os.getenv("SH_CLIENT_ID", vars["SH_CLIENT_ID"])
+os.environ["SH_CLIENT_SECRET"] = os.getenv("SH_CLIENT_SECRET", vars["SH_CLIENT_SECRET"])
 
 # explore available images
 print("Looking for images in the last month")
