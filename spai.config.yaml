@@ -1,0 +1,21 @@
+project: satellite-imagery
+description: Download and Visualize Satellite Imagery with SPAI
+thumbnail: https://www.un-spider.org/sites/default/files/styles/downscale_to_676w_cut_to_273h/public/Ecosystem_services.jpg?itok=EbSqAdef
+
+storage:
+  - name: data
+    type: s3
+scripts:
+  - name: downloader
+    run_every: 1
+    run_on_start: True
+apis:
+  - name: xyz
+    port: 8000
+uis:
+  - name: map
+    command: streamlit run main.py --server.address 0.0.0.0 --server.port 80
+    # command: streamlit run main.py --server.address localhost
+    port: 8501
+    env: # use api names as url placeholders
+      XYZ_URL: api.xyz

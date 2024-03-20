@@ -1,2 +1,3 @@
-# satellite-imagery-template
-SPAI template to download and visualize satellite imagery
+# hello-spai-template
+
+Basic SPAI template for testing
