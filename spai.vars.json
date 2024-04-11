@@ -38,7 +38,5 @@
   "DATES": [
     "2020-01-01",
     "2020-01-10"
-  ],
-  "SH_CLIENT_ID": "client-id",
-  "SH_CLIENT_SECRET": "client-secret"
+  ]
 }

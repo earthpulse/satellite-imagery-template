@@ -1,36 +1,34 @@
-from dotenv import load_dotenv
-import os
-
 from spai.storage import Storage
 from spai.config import SPAIVars
-from spai.data.satellite import explore_satellite_images, download_satellite_image
-
-load_dotenv()
+from spai.data.satellite import explore_satellite_imagery, download_satellite_imagery
 
 vars = SPAIVars()
 
-
-os.environ["SH_CLIENT_ID"] = os.getenv("SH_CLIENT_ID", vars["SH_CLIENT_ID"])
-os.environ["SH_CLIENT_SECRET"] = os.getenv("SH_CLIENT_SECRET", vars["SH_CLIENT_SECRET"])
-
 # explore available images
-print("Looking for images in the last month")
-images = explore_satellite_images(vars["AOI"], vars["DATES"], cloud_cover=10)
+print(
+    "Looking for images in the range",
+    vars["DATES"],
+    "with cloud cover less than 10%...",
+)
+images = explore_satellite_imagery(vars["AOI"], vars["DATES"], cloud_cover=10)
 if len(images) == 0:
     raise ValueError("No images found")
 
 # download images and save locally
 storage = Storage()
-sensor = "S2L2A"  # or 'S2L1C'
+sensor = "sentinel-2-l2a"
 existing_images = storage["data"].list(f"{sensor}*.tif")
+
 dates = [image.split("_")[1].split(".")[0] for image in existing_images]
 print("Found", len(images), f"image{'s' if len(images) > 1 else ''}")
+new_images = []
 for image in images:
     # check if image is already downloaded
-    date = image["date"].split("T")[0]
-    if date in dates:
+    date = image["datetime"].split("T")[0]
+    if date in dates or date in new_images:
         print("Image already downloaded:", date)
         continue
+    new_images.append(date)
     print("Downloading new image:", date)
-    path = download_satellite_image(storage["data"], vars["AOI"], date, sensor)
+    path = download_satellite_imagery(storage["data"], vars["AOI"], date)
     print("Image saved at", path)
