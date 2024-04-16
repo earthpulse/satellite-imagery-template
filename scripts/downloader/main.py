@@ -5,11 +5,7 @@ from spai.data.satellite import explore_satellite_imagery, download_satellite_im
 vars = SPAIVars()
 
 # explore available images
-print(
-    "Looking for images in the range",
-    vars["DATES"],
-    "with cloud cover less than 10%...",
-)
+print("Looking for images in the range", vars["DATES"])
 images = explore_satellite_imagery(vars["AOI"], vars["DATES"])
 if len(images) == 0:
     raise ValueError("No images found")
