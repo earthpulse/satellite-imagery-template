@@ -32,13 +32,3 @@ for image in images:
     print("Downloading new image:", date)
     path = download_satellite_imagery(storage["data"], vars["AOI"], date)
     print("Image saved at", path)
-
-# # upload
-# {'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {}, 'geometry': {'coordinates': [[[2.057826447074177, 41.46536860970346], [2.057826447074177, 41.42620786810252], [2.1236170193665203, 41.42620786810252], [2.1236170193665203, 41.46536860970346], [2.057826447074177, 41.46536860970346]]], 'type': 'Polygon'}}]}
-# ['2024-04-02', '2024-04-03']
-
-# # draw
-# {'type': 'Feature', 'properties': {}, 'geometry': {'type': 'Polygon', 'coordinates': [[[2.097638, 41.431626], [2.034514, 41.388335], [2.129201, 41.372867], [2.097638, 41.431626]]]}}
-# ['2024-04-03', '2024-04-12']
-
-# {'type': 'FeatureCollection', 'features': [{'type': 'Feature', 'properties': {}, 'geometry': {'type': 'Polygon', 'coordinates': [[[2.131534, 41.421322], [2.093073, 41.380086], [2.194722, 41.359458], [2.191974, 41.427505], [2.131534, 41.421322]]]}}]}
