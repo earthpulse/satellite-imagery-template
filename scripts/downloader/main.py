@@ -36,3 +36,7 @@ vars = SPAIVars()
 aoi = vars["AOI"]
 
 print(aoi)
+
+dates = vars["DATES"]
+
+print(dates)
