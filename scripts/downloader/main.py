@@ -10,7 +10,7 @@ print(
     vars["DATES"],
     "with cloud cover less than 10%...",
 )
-images = explore_satellite_imagery(vars["AOI"], vars["DATES"], cloud_cover=10)
+images = explore_satellite_imagery(vars["AOI"], vars["DATES"])
 if len(images) == 0:
     raise ValueError("No images found")
 
